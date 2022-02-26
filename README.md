@@ -7,6 +7,8 @@ I also [posted some feedback](https://forum.unity.com/threads/you-didnt-account-
 
 # Documentation
 
+The project is currently made with Unity 2021.2.13f1
+
 ## *XRInteractionExample* scene
 This scene just contains an example of how to setup the *XR Interaction Toolkit* package with a traditional worldspace canvas.
 
