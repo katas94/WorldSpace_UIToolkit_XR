@@ -21,6 +21,8 @@ The second part of the experimental work are the modifications of some original 
 * The **XRUIInputModuleFix** component that must be added to the EventSystem object instead of the original **XRUIInputModule**. This fixes the dragging events that doesn't work with the original module.
 * The **IUIInteractorRegisterer** component that must be added to any ray interactor object that you want to enable interactions with your UI panel. This works together with the **XRUIInputModuleFix** module.
 
+The **XRUIInputModuleFix** component has a new field called "Use Pen Pointer Id Base". This is a hack on how the UIToolkit pointer events are handled that will slightly change how interaction with multiple XR controllers work together. If enabled, you will be able to trigger hover events with both controllers (although only one of them will work if both pointers are hovering the same panel at the same time). You will also be able to drag the background to scroll with both controllers.
+
 # Conclusions
 The current Unity's EventSystem for UI interactions (either with the traditional canvas or the new UIToolkit) looks too complex and convoluted for me. Also it is definitelly not well suited for new use cases like VR, where we can have multiple mouse-like pointers that can trigger hover events. The main pain point of the whole system is the fact that all the events are hardcoded to be projections from the screenspace pixels, which is definitelly not the case with some kinds of worldspace interactions.
 
