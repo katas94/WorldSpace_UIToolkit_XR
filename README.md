@@ -3,9 +3,9 @@ Experimental project that enables non-official runtime worldspace Unity's UITool
 
 This project is born from [this reddit post](https://www.reddit.com/r/Unity3D/comments/qh4fe4/here_is_a_script_to_use_uitoolkit_in_runtime/) where you can find some detailed information on how to setup a new project with the *WorldSpaceUIDocument* script.
 
-# Documentation
-
 I also [posted some feedback](https://forum.unity.com/threads/you-didnt-account-for-some-use-cases-in-the-event-dispatcher-vr-ar.1187116/) on the official Unity's UIToolkit forums about my findings on the XR usecase for the package.
+
+# Documentation
 
 ## *XRInteractionExample* scene
 This scene just contains an example of how to setup the *XR Interaction Toolkit* package with a traditional worldspace canvas.
