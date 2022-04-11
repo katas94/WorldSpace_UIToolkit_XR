@@ -23,6 +23,8 @@ namespace Katas.Experimental
         [SerializeField] protected PanelSettings _panelSettingsPrefab;
         [Tooltip("RenderTexture that will be used to create a new instance for this panel.")]
         [SerializeField] protected RenderTexture _renderTexturePrefab;
+        [Tooltip("If set to false, the component will expect to find a UIDocument attached to this game object. If true, it will generate a new one.")]
+        [SerializeField] protected bool _createNewUIDocument = true;
 
         [Tooltip("Some input modules (like the XRUIInputModule from the XR Interaction toolkit package) doesn't send PointerMove events. If you are using such an input module, just set this to true so at least you can properly drag things around.")]
         public bool UseDragEventFix = false;
@@ -148,9 +150,11 @@ namespace Katas.Experimental
             _panelSettings.name = $"{name} - PanelSettings";
 
             // generate UIDocument
-            _uiDocument = gameObject.AddComponent<UIDocument>();
+            _uiDocument ??= _createNewUIDocument ? gameObject.AddComponent<UIDocument>() : gameObject.GetComponent<UIDocument>();
             _uiDocument.panelSettings = _panelSettings;
-            _uiDocument.visualTreeAsset = _visualTreeAsset;
+
+            if (_visualTreeAsset is not null)
+                _uiDocument.visualTreeAsset = _visualTreeAsset;
 
             // generate material
             if (_panelSettings.colorClearValue.a < 1.0f)
@@ -198,7 +202,6 @@ namespace Katas.Experimental
 
         protected void DestroyGeneratedAssets ()
         {
-            if (_uiDocument) Destroy(_uiDocument);
             if (_renderTexture) Destroy(_renderTexture);
             if (_panelSettings) Destroy(_panelSettings);
             if (_material) Destroy(_material);
@@ -214,7 +217,7 @@ namespace Katas.Experimental
         {
             if (Application.isPlaying && _material != null && _uiDocument != null)
             {
-                if (_uiDocument.visualTreeAsset != _visualTreeAsset)
+                if (_uiDocument.visualTreeAsset != _visualTreeAsset && _visualTreeAsset is not null)
                     VisualTreeAsset = _visualTreeAsset;
                 if (_panelScale != _panelSettings.scale)
                     _panelSettings.scale = _panelScale;
